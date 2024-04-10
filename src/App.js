@@ -12,6 +12,7 @@ import Navbar from './Components/Navbar';
 import Footer from './Components/Footer';
 import Upload from './Pages/Upload/Upload';
 import Admin from './Pages/Admin/Admin';
+import Signup from './Pages/Signup/Signup';
 
 function App() {
   return (
@@ -21,14 +22,16 @@ function App() {
           <Notifications />
           <Navbar />
           <Routes>
-            <Route path='/home' element={<Home />} />
+            <Route exact path='/' element={<Home />} />
+            {/* <Route path='/home' element={<Home />} /> */}
             <Route path='/gallery' element={<Gallery />} />
             <Route path='/product' element={<Product />} />
             <Route path='/contact' element={<Contact />} />
             <Route path='/admin' element={<Admin />} />
+            <Route path='/admin' element={<Admin />} />
+            <Route path='/signup' element={<Signup />} />
             {/* <Route path='/login' element={<Login />} /> */}
             <Route path='/upload' element={<Upload />} />
-            <Route exact path='/' element={<Home />} />
             <Route exact path='*' element={<PageNotFound />} />
           </Routes>
           <Footer />
