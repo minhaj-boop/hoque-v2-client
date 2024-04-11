@@ -4,6 +4,12 @@ import openn from "../../src/icons/open.png";
 import close from "../../src/icons/close.png";
 const Menu = () => {
   const [open, setOpen] = useState(false);
+  const user = localStorage.getItem("token");
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+    // navigate("/admin");
+  };
   const NavLinks = [
     { id: 1, title: "Homepage", url: "/" },
     { id: 2, title: "Gallery", url: "/gallery" },
@@ -37,13 +43,19 @@ const Menu = () => {
               {item.title}
             </NavLink>
           ))}
-          {/* {!user ? (
-            <NavLink to="/login" onClick={() => setOpen(false)}>
-              Login
+          {/* {user && (
+            <NavLink to="/upload" onClick={setOpen(false)}>
+              Upload
             </NavLink>
-          ) : (
-            <NavLink to="/orders" onClick={() => setOpen(false)}>
-              Orders
+          )}
+          {user && (
+            <NavLink
+              onClick={() => {
+                setOpen(false);
+                handleLogout();
+              }}
+            >
+              Logout
             </NavLink>
           )} */}
         </div>

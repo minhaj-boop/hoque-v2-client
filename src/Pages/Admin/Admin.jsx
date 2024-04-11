@@ -18,6 +18,7 @@ const Admin = () => {
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
       window.location = "/upload";
+      // console.log(res.message, data);
     } catch (error) {
       if (
         error.response &&
@@ -51,7 +52,7 @@ const Admin = () => {
           <div>
             <input
               className="w-full p-4 text-sm bg-gray-50 focus:outline-none border border-gray-200 rounded text-gray-600"
-              type="text"
+              type="password"
               name="password"
               value={data.password}
               placeholder="Password"

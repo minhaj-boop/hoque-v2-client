@@ -6,9 +6,11 @@ import Menu from "./Menu";
 const Navbar = () => {
   // const user = false;
   // const navigate = useNavigate();
+  const user = localStorage.getItem("token");
   const handleLogout = () => {
     localStorage.removeItem("token");
     window.location.reload();
+    window.location = "/";
     // navigate("/admin");
   };
   return (
@@ -35,18 +37,38 @@ const Navbar = () => {
         >
           Contact
         </NavLink>
-        <NavLink
-          to="/admin"
-          className="hover:border-b-orange-400 hover:border-b-2 focus:border-b-orange-400 focus:border-b-2 md:h-[2rem]"
-        >
-          Admin
-        </NavLink>
-        <NavLink
-          onClick={handleLogout}
-          className="hover:border-b-orange-400 hover:border-b-2 focus:border-b-orange-400 focus:border-b-2 md:h-[2rem]"
-        >
-          Logout
-        </NavLink>
+        {!user && (
+          <NavLink
+            to="/admin"
+            className="hover:border-b-orange-400 hover:border-b-2 focus:border-b-orange-400 focus:border-b-2 md:h-[2rem]"
+          >
+            Admin
+          </NavLink>
+        )}
+        {user && (
+          <NavLink
+            to="/upload"
+            className="hover:border-b-orange-400 hover:border-b-2 focus:border-b-orange-400 focus:border-b-2 md:h-[2rem]"
+          >
+            Upload
+          </NavLink>
+        )}
+        {user && (
+          <NavLink
+            to="/signup"
+            className="hover:border-b-orange-400 hover:border-b-2 focus:border-b-orange-400 focus:border-b-2 md:h-[2rem]"
+          >
+            Create Admin
+          </NavLink>
+        )}
+        {user && (
+          <NavLink
+            onClick={handleLogout}
+            className="hover:border-b-orange-400 hover:border-b-2 focus:border-b-orange-400 focus:border-b-2 md:h-[2rem]"
+          >
+            Logout
+          </NavLink>
+        )}
       </div>
       <div className="md:hidden">
         <Menu />

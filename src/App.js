@@ -15,6 +15,7 @@ import Admin from './Pages/Admin/Admin';
 import Signup from './Pages/Signup/Signup';
 
 function App() {
+  const user = localStorage.getItem("token")
   return (
     <>
       <Router>
@@ -27,11 +28,11 @@ function App() {
             <Route path='/gallery' element={<Gallery />} />
             <Route path='/product' element={<Product />} />
             <Route path='/contact' element={<Contact />} />
-            <Route path='/admin' element={<Admin />} />
-            <Route path='/admin' element={<Admin />} />
-            <Route path='/signup' element={<Signup />} />
+            {!user && <Route path='/admin' element={<Admin />} />}
+            {/* <Route path='/admin' element={<Admin />} /> */}
+            {user && <Route path='/signup' element={<Signup />} />}
             {/* <Route path='/login' element={<Login />} /> */}
-            <Route path='/upload' element={<Upload />} />
+            {user && <Route path='/upload' element={<Upload />} />}
             <Route exact path='*' element={<PageNotFound />} />
           </Routes>
           <Footer />

@@ -16,7 +16,7 @@ const Featured = () => {
         const data = await response.json();
         // Update the state with the fetched data
         setImages(data.data);
-        console.log(data.data);
+        // console.log(data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
