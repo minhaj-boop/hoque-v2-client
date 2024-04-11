@@ -37,11 +37,39 @@ const Slider = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const [images, setImages] = useState([]);
+
+  useEffect(() => {
+    // Define a function to fetch the data
+    const fetchData = async () => {
+      try {
+        // Make the API call
+        const response = await fetch("http://localhost:8080/api/all-images");
+        // Parse the response as JSON
+        const data = await response.json();
+        // Update the state with the fetched data
+        setImages(data.data);
+        console.log(data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Call the fetchData function when the component mounts
+    fetchData();
+
+    // Optionally, return a cleanup function to handle component unmounting
+    // This prevents memory leaks and unexpected behavior
+    return () => {
+      // Cleanup code, if necessary
+    };
+  }, []);
+
   return (
     <div className="flex h-[50vh] md:h-[75vh] bg-fuchsia-50 relative overflow-hidden">
       {/* IMAGE AND TEXT CONTAINER */}
       <div className="w-full absolute h-[50vh] md:h-[75vh]">
-        {data.map((item, index) => (
+        {images.map((item, index) => (
           <div
             key={index}
             className={`absolute inset-0 flex flex-col justify-center items-center transition-transform duration-1000 ${
@@ -62,7 +90,7 @@ const Slider = () => {
               //   className="transition-opacity duration-500"
               // />
               <img
-                src={item.image}
+                src={item.url}
                 alt=""
                 className="w-full h-auto object-cover transition-opacity duration-500"
               />
