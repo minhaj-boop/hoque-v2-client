@@ -7,16 +7,38 @@ const Menu = () => {
   const user = localStorage.getItem("token");
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.reload();
+    // window.location.reload();
+    window.location = "/";
     // navigate("/admin");
   };
+  // const NavLinks = [
+  //   { id: 1, title: "Homepage", url: "/" },
+  //   { id: 2, title: "Gallery", url: "/gallery" },
+  //   { id: 3, title: "Contact", url: "/contact" },
+  //   { id: 4, title: "Admin", url: "/admin" },
+  //   { id: 5, title: "Upload", url: "/upload" },
+  //   { id: 5, title: "Create Admin", url: "/signup" },
+  //   { id: 6, title: "Logout", url: "/" },
+  // ];
+
   const NavLinks = [
     { id: 1, title: "Homepage", url: "/" },
     { id: 2, title: "Gallery", url: "/gallery" },
     { id: 3, title: "Contact", url: "/contact" },
-    { id: 3, title: "Admin", url: "/admin" },
   ];
-  // const user = true;
+
+  if (!user) {
+    NavLinks.push({ id: 4, title: "Admin", url: "/admin" });
+  }
+
+  if (user) {
+    NavLinks.push(
+      { id: 5, title: "Upload", url: "/upload" },
+      { id: 6, title: "Create Admin", url: "/signup" },
+      { id: 7, title: "Logout", url: "/", onClick: handleLogout }
+    );
+  }
+
   return (
     <div>
       {!open ? (
@@ -37,9 +59,18 @@ const Menu = () => {
         />
       )}
       {open && (
-        <div className="bg-orange-500 text-white absolute left-0 top-[100%] h-[calc(100vh-6rem)] w-full flex flex-col gap-8 items-center justify-center text-3xl z-50">
+        <div className="bg-orange-500 text-white absolute left-0 top-[100%] h-[calc(100vh-6rem)] w-full flex flex-col gap-4 items-center justify-center text-2xl z-50 overflow-y-scroll">
           {NavLinks.map((item) => (
-            <NavLink key={item.id} to={item.url} onClick={() => setOpen(false)}>
+            <NavLink
+              key={item.id}
+              to={item.url}
+              onClick={() => {
+                setOpen(false);
+                if (item.onClick) {
+                  item.onClick();
+                }
+              }}
+            >
               {item.title}
             </NavLink>
           ))}
