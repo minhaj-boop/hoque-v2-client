@@ -21,9 +21,9 @@ const Admin = () => {
       localStorage.setItem("token", res.data);
       const user = localStorage.getItem("token");
       if (user) {
-        window.location = "/upload";
-        // navigate("/upload");
+        window.location = "/";
       }
+      // navigate("/upload");
       // console.log(res.message, data);
     } catch (error) {
       if (
