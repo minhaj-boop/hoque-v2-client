@@ -18,7 +18,7 @@ const Upload = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const url = "http://localhost:8080/api/upload-image";
+      const url = "https://hoque-v2-server.vercel.app/api/upload-image";
       const { data: res } = await axios.post(url, data);
       //   navigate("/admin");
       console.log(res.message);

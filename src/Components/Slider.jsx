@@ -44,7 +44,9 @@ const Slider = () => {
     const fetchData = async () => {
       try {
         // Make the API call
-        const response = await fetch("http://localhost:8080/api/all-images");
+        const response = await fetch(
+          "https://hoque-v2-server.vercel.app/api/all-images"
+        );
         // Parse the response as JSON
         const data = await response.json();
         // Update the state with the fetched data
