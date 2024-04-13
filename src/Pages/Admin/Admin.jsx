@@ -1,11 +1,13 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+// import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 const Admin = () => {
   const [data, setData] = useState({ email: "", password: "" });
   const [error, setError] = useState("");
+  // const navigate = useNavigate();
 
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
@@ -17,7 +19,11 @@ const Admin = () => {
       const url = "https://hoque-v2-server.vercel.app/api/auth";
       const { data: res } = await axios.post(url, data);
       localStorage.setItem("token", res.data);
-      window.location = "/upload";
+      const user = localStorage.getItem("token");
+      if (user) {
+        window.location = "/upload";
+        // navigate("/upload");
+      }
       // console.log(res.message, data);
     } catch (error) {
       if (
