@@ -32,6 +32,12 @@ const Signup = () => {
         setError(error.response.data.message);
       }
     }
+    setData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+    });
   };
 
   return (

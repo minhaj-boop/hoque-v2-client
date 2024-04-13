@@ -13,6 +13,7 @@ import Footer from './Components/Footer';
 import Upload from './Pages/Upload/Upload';
 import Admin from './Pages/Admin/Admin';
 import Signup from './Pages/Signup/Signup';
+import Message from './Pages/Message/Message';
 
 function App() {
   const user = localStorage.getItem("token")
@@ -33,6 +34,8 @@ function App() {
             {user && <Route path='/signup' element={<Signup />} />}
             {/* <Route path='/login' element={<Login />} /> */}
             {user && <Route path='/upload' element={<Upload />} />}
+            {user && <Route path='/messages' element={<Message />} />}
+
             <Route exact path='*' element={<PageNotFound />} />
           </Routes>
           <Footer />

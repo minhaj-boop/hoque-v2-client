@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import axios from "axios";
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -13,9 +13,23 @@ const Contact = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     // Handle form submission logic here
+    try {
+      const url = "http://localhost:8080/api/message";
+      const { data: res } = await axios.post(url, formData);
+      console.log(res.message);
+    } catch (error) {
+      console.log(error);
+      // if (
+      //   error.response &&
+      //   error.response.status >= 400 &&
+      //   error.response.status <= 500
+      // ) {
+      //   setError(error.response.data.message);
+      // }
+    }
     // console.log(formData);
     // Reset form fields after submission
     setFormData({

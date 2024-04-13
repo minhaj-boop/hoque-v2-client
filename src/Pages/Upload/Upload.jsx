@@ -31,6 +31,11 @@ const Upload = () => {
         setError(error.response.data.message);
       }
     }
+    setData({
+      title: "",
+      desc: "",
+      url: "",
+    });
   };
 
   return (
