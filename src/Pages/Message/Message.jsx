@@ -1,8 +1,37 @@
-import React, { useState } from "react";
-import { data } from "../../data";
+import React, { useEffect, useState } from "react";
+// import { data } from "../../data";
 
 const Message = () => {
   const [expandedRows, setExpandedRows] = useState(null);
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    // Define a function to fetch the data
+    const fetchData = async () => {
+      try {
+        // Make the API call
+        const response = await fetch(
+          "https://hoque-v2-server.vercel.app/api/all-messages"
+        );
+        // Parse the response as JSON
+        const data = await response.json();
+        // Update the state with the fetched data
+        setMessages(data.data);
+        // console.log(data.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    // Call the fetchData function when the component mounts
+    fetchData();
+
+    // Optionally, return a cleanup function to handle component unmounting
+    // This prevents memory leaks and unexpected behavior
+    return () => {
+      // Cleanup code, if necessary
+    };
+  }, []);
 
   // expand table row
   const handleExpandRow = (userId) => {
@@ -18,38 +47,36 @@ const Message = () => {
     }
   };
   return (
-    <div className=" bg-slate-600 w-full h-full flex justify-center items-center">
-      <table>
-        <thead>
-          <tr>
-            <th>S.no</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Gender</th>
+    <div className="w-full overflow-x-scroll h-full">
+      <table className="w-full border border-red-500">
+        <thead className="">
+          <tr className="">
+            <th className="border border-red-500">Name</th>
+            <th className="border border-red-500">Email</th>
+            <th className="border border-red-500">Phone</th>
+            <th className="border border-red-500">Date</th>
           </tr>
         </thead>
-        {data.map((item, index) => (
-          <tbody>
+        {messages.map((item, index) => (
+          <tbody className="border border-red-500">
             <tr
-              key={index}
+              key={item.id}
               onClick={() => handleExpandRow(index)}
-              className=" cursor-pointer"
+              className=" border-t border-red-500 cursor-pointer"
             >
-              <td>{index + 1}</td>
-              <td>{item.first_name}</td>
-              <td>{item.last_name}</td>
-              <td>{item.gender}</td>
+              {/* <td>{index + 1}</td> */}
+              <td className="border border-red-500">{item.name}</td>
+              <td className="border border-red-500">{item.email}</td>
+              <td className="border border-red-500">{item.phone}</td>
+              <td className="border border-red-500">{item.date}</td>
             </tr>
             {expandedRows === index ? (
               <tr>
-                <td colSpan="4" className="collaps-viewer">
-                  {data.length > 0 ? (
-                    <li>
-                      {`The Phone Number of ${item.first_name} is ${item.phone}`}{" "}
-                      <br />{" "}
-                    </li>
+                <td colSpan="4" className=" text-center">
+                  {messages.length > 0 ? (
+                    <p>{item.message}</p>
                   ) : (
-                    <div className="no-data"> No activity found! </div>
+                    <div className=""> No activity found! </div>
                   )}
                 </td>
               </tr>

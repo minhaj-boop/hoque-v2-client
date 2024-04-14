@@ -26,7 +26,7 @@ const Contact = () => {
     };
 
     try {
-      const url = "http://localhost:8080/api/message";
+      const url = "https://hoque-v2-server.vercel.app/api/message";
       const { data: res } = await axios.post(url, formDataWithDate);
       console.log(res.message);
     } catch (error) {
