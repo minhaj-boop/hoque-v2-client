@@ -15,10 +15,19 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     // Handle form submission logic here
+    const currentDate = new Date().toLocaleDateString("en-GB").toString();
+    // setFormData({ ...formData, date: currentDate });
+    // console.log(formData);
+    const formDataWithDate = {
+      ...formData,
+      date: currentDate, // Add 'date' property to formData
+    };
+
     try {
       const url = "http://localhost:8080/api/message";
-      const { data: res } = await axios.post(url, formData);
+      const { data: res } = await axios.post(url, formDataWithDate);
       console.log(res.message);
     } catch (error) {
       console.log(error);
