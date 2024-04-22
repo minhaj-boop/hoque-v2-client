@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import Dropdown from "../../Components/Dropdown";
 
 const Upload = () => {
   const [data, setData] = useState({
@@ -9,8 +10,9 @@ const Upload = () => {
   });
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
+  const [values, setValues] = useState([]);
+  // console.log(values[0].name);
   //   const navigate = useNavigate();
-
   const handleChange = ({ currentTarget: input }) => {
     setData({ ...data, [input.name]: input.value });
   };
@@ -18,10 +20,14 @@ const Upload = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // Add name from values state to the data state
+      const updatedData = { ...data, category: values[0].name };
+      // console.log("Updated:", updatedData);
       const url = "https://hoque-v2-server.vercel.app/api/upload-image";
-      const { data: res } = await axios.post(url, data);
+      const { data: res } = await axios.post(url, updatedData);
       //   navigate("/admin");
       console.log(res.message);
+      // console.log(data);
     } catch (error) {
       if (
         error.response &&
@@ -76,6 +82,7 @@ const Upload = () => {
                 required
                 className="outline-none border-none w-[370px] p-[15px] rounded-[10px] bg-orange-100 mx-[5px] mb-[5px] text-[14px]"
               />
+              <Dropdown values={values} setValues={setValues} />
               {error && (
                 <div className="w-[370px] p-[15px] mx-[5px] text-[14px] bg-[#f34646] text-white rounded-[5px] text-center">
                   {error}
