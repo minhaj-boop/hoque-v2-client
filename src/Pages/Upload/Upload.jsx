@@ -7,6 +7,7 @@ const Upload = () => {
     title: "",
     desc: "",
     url: "",
+    blurhash: "",
   });
   const [error, setError] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -41,6 +42,7 @@ const Upload = () => {
       title: "",
       desc: "",
       url: "",
+      blurhash: "",
     });
   };
 
@@ -79,6 +81,15 @@ const Upload = () => {
                 name="url"
                 onChange={handleChange}
                 value={data.url}
+                required
+                className="outline-none border-none w-[370px] p-[15px] rounded-[10px] bg-orange-100 mx-[5px] mb-[5px] text-[14px]"
+              />
+              <input
+                type="text"
+                placeholder="Blurhash string"
+                name="blurhash"
+                onChange={handleChange}
+                value={data.blurhash}
                 required
                 className="outline-none border-none w-[370px] p-[15px] rounded-[10px] bg-orange-100 mx-[5px] mb-[5px] text-[14px]"
               />

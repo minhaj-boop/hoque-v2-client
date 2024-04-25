@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 import { Link } from "react-router-dom";
 import icon1 from "../icons/gallery3.png";
+import BlurhashImage from "./BlurhashImage";
 
 const Featured = () => {
   const [images, setImages] = useState([]);
@@ -49,11 +50,14 @@ const Featured = () => {
                 to="/gallery"
                 className="relative w-full h-3/5 hover:scale-90 transition-all duration-500 cursor-pointer hover:opacity-50"
               >
-                <img
+                {/* <img
                   src={item.url}
                   alt=""
+                  loading="lazy"
                   className="object-fill w-full h-full "
-                />
+                /> */}
+
+                <BlurhashImage src={item.url} blurhash={item.blurhash} />
 
                 <img
                   src={icon1}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import img1 from "../images/img1.jpg";
 import img2 from "../images/img2.jpg";
 import img3 from "../images/img3.jpg";
+import BlurhashImage from "./BlurhashImage";
 
 const data = [
   {
@@ -91,11 +92,13 @@ const Slider = () => {
               //   objectFit="cover"
               //   className="transition-opacity duration-500"
               // />
-              <img
-                src={item.url}
-                alt=""
-                className="w-full h-auto object-cover transition-opacity duration-500"
-              />
+              // <img
+              //   src={item.url}
+              //   alt=""
+              //   loading="lazy"
+              //   className="w-full h-auto object-cover transition-opacity duration-500"
+              // />
+              <BlurhashImage src={item.url} blurhash={item.blurhash} />
             }
             <div className="absolute top-[40%] flex flex-col justify-center items-center">
               <h1 className="text-3xl text-center uppercase p-4 md:p-10 md:text-4xl xl:text-6xl text-orange-400 transition-opacity duration-500">

@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import BlurhashImage from "./BlurhashImage";
 
 const Category = ({ data }) => {
   //   console.log(data);
@@ -14,10 +15,16 @@ const Category = ({ data }) => {
           {/* IMAGE CONTAINER */}
           {item.url && (
             <div className="relative h-full transition-all duration-500 hover:opacity-50 hover:scale-90">
-              <img
+              {/* <img
                 src={item.url}
                 alt=""
+                loading="lazy"
                 className="object-fill w-full h-full"
+              /> */}
+              <BlurhashImage
+                src={item.url}
+                blurhash={item.blurhash}
+                gallery={true}
               />
               <div className=" absolute top-[45%] flex items-center justify-center font-bold">
                 <p className="p-4">{item.desc}</p>
