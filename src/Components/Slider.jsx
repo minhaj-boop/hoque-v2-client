@@ -69,9 +69,9 @@ const Slider = () => {
   }, []);
 
   return (
-    <div className="flex h-[50vh] md:h-[75vh] bg-fuchsia-50 relative overflow-hidden">
+    <div className="flex h-[45vh] md:h-[75vh] bg-fuchsia-50 relative overflow-hidden">
       {/* IMAGE AND TEXT CONTAINER */}
-      <div className="w-full absolute h-[50vh] md:h-[75vh]">
+      <div className="w-full absolute h-[45vh] md:h-[75vh]">
         {images.map((item, index) => (
           <div
             key={index}

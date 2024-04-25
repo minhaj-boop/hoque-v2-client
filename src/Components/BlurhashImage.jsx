@@ -52,8 +52,8 @@ const BlurhashImage = ({ src, blurhash, gallery, featured }) => {
           style={{
             display: !imageLoaded ? "none" : "inline",
             width: "100%",
-            height: "auto",
-            objectFit: "cover",
+            height: "100%",
+            objectFit: "fill",
             transitionProperty: "opacity",
             transitionDuration: "500ms",
           }}
