@@ -68,6 +68,7 @@ const Featured = () => {
                   alt=""
                   height={100}
                   width={100}
+                  loading="lazy"
                   className="object-contain absolute top-[40%] left-[40%]"
                 />
               </Link>
