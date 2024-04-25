@@ -57,7 +57,11 @@ const Featured = () => {
                   className="object-fill w-full h-full "
                 /> */}
 
-                <BlurhashImage src={item.url} blurhash={item.blurhash} />
+                <BlurhashImage
+                  src={item.url}
+                  blurhash={item.blurhash}
+                  featured={true}
+                />
 
                 <img
                   src={icon1}
