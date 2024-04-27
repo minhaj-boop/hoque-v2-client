@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Blurhash } from "react-blurhash";
 
-const BlurhashImage = ({ src, blurhash, gallery, featured }) => {
+const BlurhashImage = ({ src, blurhash, gallery, featured, product }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const BlurhashImage = ({ src, blurhash, gallery, featured }) => {
         />
       </div>
 
-      {gallery || featured ? (
+      {gallery || featured || product ? (
         <img
           src={src}
           alt=""

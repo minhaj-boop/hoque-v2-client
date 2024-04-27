@@ -60,7 +60,7 @@ const Menu = () => {
         />
       )}
       {open && (
-        <div className="bg-orange-500 text-white absolute left-0 top-[100%] h-[calc(100vh-6rem)] w-full flex flex-col gap-4 items-center justify-center text-2xl z-50 overflow-y-scroll">
+        <div className="bg-orange-500 text-white absolute left-0 top-[100%] h-[calc(100vh-6rem)] w-full flex flex-col gap-4 items-center justify-center text-2xl z-50 overflow-y-scroll uppercase">
           {NavLinks.map((item) => (
             <NavLink
               key={item.id}
