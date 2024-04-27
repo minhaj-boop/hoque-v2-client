@@ -8,7 +8,7 @@ const Category = ({ data }) => {
     <div className="flex flex-wrap text-[#f2f7f4] border-b border-red-500">
       {data.map((item) => (
         <Link
-          href={`/product/${item._id}`}
+          to={`/product/${item._id}`}
           key={item._id}
           className="w-full h-[60vh] sm:w-1/2 lg:w-1/3 flex flex-col justify-between group odd:bg-fuchsia-50"
         >

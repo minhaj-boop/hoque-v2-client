@@ -27,7 +27,7 @@ function App() {
             <Route exact path='/' element={<Home />} />
             {/* <Route path='/home' element={<Home />} /> */}
             <Route path='/gallery' element={<Gallery />} />
-            <Route path='/product' element={<Product />} />
+            <Route path='/product/:id' element={<Product />} />
             <Route path='/contact' element={<Contact />} />
             {!user && <Route path='/admin' element={<Admin />} />}
             {/* <Route path='/admin' element={<Admin />} /> */}
