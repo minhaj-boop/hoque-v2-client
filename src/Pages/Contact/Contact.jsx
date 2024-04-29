@@ -1,6 +1,6 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import emailjs from "@emailjs/browser";
+// import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -43,26 +43,6 @@ const Contact = () => {
     }
     // console.log(formData);
     // Reset form fields after submission
-  };
-
-  //Email
-  const form = useRef();
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    emailjs
-      .sendForm("service_j0gww2x", "template_7ck1nn5", form.current, {
-        publicKey: "qAvqh1qDjHDFGaVwM",
-      })
-      .then(
-        () => {
-          console.log("SUCCESS!");
-        },
-        (error) => {
-          console.log("FAILED...", error.text);
-        }
-      );
     setFormData({
       name: "",
       email: "",
@@ -70,6 +50,26 @@ const Contact = () => {
       message: "",
     });
   };
+
+  //Email
+  // const form = useRef();
+
+  // const sendEmail = (e) => {
+  //   e.preventDefault();
+
+  //   emailjs
+  //     .sendForm("service_j0gww2x", "template_7ck1nn5", form.current, {
+  //       publicKey: "qAvqh1qDjHDFGaVwM",
+  //     })
+  //     .then(
+  //       () => {
+  //         console.log("SUCCESS!");
+  //       },
+  //       (error) => {
+  //         console.log("FAILED...", error.text);
+  //       }
+  //     );
+  // };
 
   return (
     <div className="flex flex-col md:flex-row w-full h-full">
@@ -87,11 +87,12 @@ const Contact = () => {
         {/* FORM */}
         <div className=" shadow-2xl rounded-[10px] flex items-center justify-center p-2">
           <form
-            ref={form}
-            onSubmit={(e) => {
-              sendEmail(e);
-              handleSubmit(e);
-            }}
+            // ref={form}
+            // onSubmit={(e) => {
+            //   sendEmail(e);
+            //   handleSubmit(e);
+            // }}
+            onSubmit={handleSubmit}
             className="w-full max-w-lg flex flex-col"
           >
             <div className="mb-4">
