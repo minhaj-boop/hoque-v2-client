@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import axios from "axios";
+import emailjs from "@emailjs/browser";
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: "",
@@ -41,6 +43,26 @@ const Contact = () => {
     }
     // console.log(formData);
     // Reset form fields after submission
+  };
+
+  //Email
+  const form = useRef();
+
+  const sendEmail = (e) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm("service_j0gww2x", "template_7ck1nn5", form.current, {
+        publicKey: "qAvqh1qDjHDFGaVwM",
+      })
+      .then(
+        () => {
+          console.log("SUCCESS!");
+        },
+        (error) => {
+          console.log("FAILED...", error.text);
+        }
+      );
     setFormData({
       name: "",
       email: "",
@@ -48,6 +70,7 @@ const Contact = () => {
       message: "",
     });
   };
+
   return (
     <div className="flex flex-col md:flex-row w-full h-full">
       <div className="flex-1 p-4 text-orange-400">
@@ -64,7 +87,11 @@ const Contact = () => {
         {/* FORM */}
         <div className=" shadow-2xl rounded-[10px] flex items-center justify-center p-2">
           <form
-            onSubmit={handleSubmit}
+            ref={form}
+            onSubmit={(e) => {
+              sendEmail(e);
+              handleSubmit(e);
+            }}
             className="w-full max-w-lg flex flex-col"
           >
             <div className="mb-4">

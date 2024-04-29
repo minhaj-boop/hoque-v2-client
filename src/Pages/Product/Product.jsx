@@ -40,7 +40,7 @@ const Product = () => {
       <h1 className="text-xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold lg:font-bold mb-[20px] uppercase">
         {product?.category}
       </h1>
-      <div className="flex">
+      <div className="flex flex-col lg:flex-row">
         <div className="flex-1 bg-slate-500">
           {product.url && product.blurhash && (
             <BlurhashImage
@@ -50,7 +50,7 @@ const Product = () => {
             />
           )}
         </div>
-        <div className=" flex flex-col items-start justify-center flex-1 bg-orange-50 ml-[15px] text-orange-400 uppercase">
+        <div className=" flex flex-col items-start justify-center flex-1 bg-orange-50 min-h-[320px] mt-[15px] lg:mt-[0px] lg:ml-[15px] text-orange-400 uppercase">
           <div className="text-lg pl-[10px] pb-[5px] md:pb-[10px] lg:pb-[15px] md:text-2xl lg:text-3xl xl:text-4xl font-normal lg:font-semibold">
             Title: {product?.title}
           </div>
