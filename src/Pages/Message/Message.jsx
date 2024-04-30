@@ -6,32 +6,31 @@ const Message = () => {
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
-    // Define a function to fetch the data
-    const fetchData = async () => {
-      try {
-        // Make the API call
-        const response = await fetch(
-          "https://hoque-v2-server.vercel.app/api/all-messages"
-        );
-        // Parse the response as JSON
-        const data = await response.json();
-        // Update the state with the fetched data
-        setMessages(data.data);
-        console.log(data.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-
     // Call the fetchData function when the component mounts
     fetchData();
-
     // Optionally, return a cleanup function to handle component unmounting
     // This prevents memory leaks and unexpected behavior
     return () => {
       // Cleanup code, if necessary
     };
   }, []);
+
+  // Define a function to fetch the data
+  const fetchData = async () => {
+    try {
+      // Make the API call
+      const response = await fetch(
+        "https://hoque-v2-server.vercel.app/api/all-messages"
+      );
+      // Parse the response as JSON
+      const data = await response.json();
+      // Update the state with the fetched data
+      setMessages(data.data);
+      // console.log(data.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  };
 
   // expand table row
   const handleExpandRow = (userId) => {
@@ -47,26 +46,30 @@ const Message = () => {
     }
   };
 
-  const deleteMessage = (id, name) => {
+  const deleteMessage = async (id, name) => {
     if (
       window.confirm(
-        `Are you sure you want to delete the message form ${name}?`
+        `Are you sure you want to delete the message from ${name}?`
       )
     ) {
-      fetch("https://hoque-v2-server.vercel.app/api/delete-message", {
-        method: "POST",
-        crossDomain: true,
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "Access-Control-Allow-Origin": "*",
-        },
-        body: JSON.stringify({
-          message: id,
-        }),
-      });
-    } else {
-      return;
+      try {
+        const response = await fetch(
+          `https://hoque-v2-server.vercel.app/api/delete-message/${id}`,
+          {
+            method: "DELETE",
+          }
+        );
+        if (response.ok) {
+          alert("Message deleted successfully");
+          fetchData(); // Refresh messages after deletion
+        } else {
+          const errorMessage = await response.text();
+          alert(`Error deleting message: ${errorMessage}`);
+        }
+      } catch (error) {
+        console.error("Error deleting message:", error);
+        alert("Failed to delete message. Please try again later.");
+      }
     }
   };
 
@@ -97,7 +100,10 @@ const Message = () => {
               <td className="border border-red-500">{item.date}</td>
               <td className=" flex items-center justify-center">
                 <div
-                  onClick={() => deleteMessage(item._id, item.name)}
+                  onClick={() => {
+                    // console.log(item._id);
+                    deleteMessage(item._id, item.name);
+                  }}
                   className="rounded border-none p-1 bg-red-600 text-white text-sm cursor-pointer hover:bg-red-400"
                 >
                   Delete
