@@ -3,6 +3,7 @@ import img1 from "../images/img1.jpg";
 import img2 from "../images/img2.jpg";
 import img3 from "../images/img3.jpg";
 import BlurhashImage from "./BlurhashImage";
+import { Link } from "react-router-dom";
 
 const data = [
   {
@@ -104,9 +105,15 @@ const Slider = () => {
               <h1 className="text-3xl text-center uppercase p-4 md:p-10 md:text-4xl xl:text-6xl text-orange-400 transition-opacity duration-500">
                 {item.title}
               </h1>
-              <button className="bg-orange-500 text-white py-4 px-8 transition-opacity duration-500">
+              {/* <button className="bg-orange-500 text-white py-4 px-8 transition-opacity duration-500">
                 See more
-              </button>
+              </button> */}
+              <Link
+                to={`/product/${item._id}`}
+                className="bg-orange-500 text-white py-4 px-8 transition-opacity duration-500"
+              >
+                See more
+              </Link>
             </div>
           </div>
         ))}

@@ -17,7 +17,7 @@ const Message = () => {
         const data = await response.json();
         // Update the state with the fetched data
         setMessages(data.data);
-        // console.log(data.data);
+        console.log(data.data);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -60,7 +60,7 @@ const Message = () => {
         {messages.map((item, index) => (
           <tbody className="border border-red-500">
             <tr
-              key={item.id}
+              key={item._id}
               onClick={() => handleExpandRow(index)}
               className=" border-t border-red-500 cursor-pointer"
             >
