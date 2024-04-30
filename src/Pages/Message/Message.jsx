@@ -46,6 +46,30 @@ const Message = () => {
       setExpandedRows(null);
     }
   };
+
+  const deleteMessage = (id, name) => {
+    if (
+      window.confirm(
+        `Are you sure you want to delete the message form ${name}?`
+      )
+    ) {
+      fetch("https://hoque-v2-server.vercel.app/api/delete-message", {
+        method: "POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          message: id,
+        }),
+      });
+    } else {
+      return;
+    }
+  };
+
   return (
     <div className="w-full overflow-x-scroll h-full">
       <table className="w-full border border-red-500">
@@ -55,20 +79,30 @@ const Message = () => {
             <th className="border border-red-500">Email</th>
             <th className="border border-red-500">Phone</th>
             <th className="border border-red-500">Date</th>
+            <th className="border border-red-500">Delete</th>
           </tr>
         </thead>
         {messages.map((item, index) => (
           <tbody className="border border-red-500">
-            <tr
-              key={item._id}
-              onClick={() => handleExpandRow(index)}
-              className=" border-t border-red-500 cursor-pointer"
-            >
+            <tr key={item._id} className=" border-t border-red-500 ">
               {/* <td>{index + 1}</td> */}
-              <td className="border border-red-500">{item.name}</td>
+              <td
+                onClick={() => handleExpandRow(index)}
+                className="border border-red-500 cursor-pointer"
+              >
+                {item.name}
+              </td>
               <td className="border border-red-500">{item.email}</td>
               <td className="border border-red-500">{item.phone}</td>
               <td className="border border-red-500">{item.date}</td>
+              <td className=" flex items-center justify-center">
+                <div
+                  onClick={() => deleteMessage(item._id, item.name)}
+                  className="rounded border-none p-1 bg-red-600 text-white text-sm cursor-pointer hover:bg-red-400"
+                >
+                  Delete
+                </div>
+              </td>
             </tr>
             {expandedRows === index ? (
               <tr>
