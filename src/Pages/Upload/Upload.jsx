@@ -49,13 +49,13 @@ const Upload = () => {
   return (
     <>
       <div className="w-100 min-h-[100vh] bg-[#f5f5f5] flex items-center justify-center">
-        <div className="w-100 h-full flex rounded-[10px] ">
+        <div className="w-100 h-full flex rounded-[10px]">
           <div className="flex-2 flex flex-col items-center justify-center bg-white rounded-tr-[10px] rounded-br-[10px]">
             <form
               className="flex flex-col items-center"
               onSubmit={handleSubmit}
             >
-              <h1 className="text-[40px] mt-0">Upload Image</h1>
+              <h1 className="text-[40px] mt-0 uppercase">Upload Image</h1>
               <input
                 type="text"
                 placeholder="Image title"
@@ -102,14 +102,14 @@ const Upload = () => {
               <div>
                 <button
                   type="submit"
-                  className="bg-orange-400 text-white m-[10px] py-[5px] px-[15px] rounded-[5px]"
+                  className="bg-orange-600 hover:bg-orange-400 text-white m-[10px] py-[5px] px-[15px] rounded-[5px]"
                 >
                   Upload
                 </button>
                 <button
                   type="button"
                   onClick={() => setShowModal(true)}
-                  className="bg-orange-400 text-white m-[10px] py-[5px] px-[15px] rounded-[5px]"
+                  className="bg-orange-600 hover:bg-orange-400 text-white m-[10px] py-[5px] px-[15px] rounded-[5px]"
                 >
                   Preview image
                 </button>

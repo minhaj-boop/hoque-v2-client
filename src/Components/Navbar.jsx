@@ -55,6 +55,14 @@ const Navbar = () => {
         )}
         {user && (
           <NavLink
+            to="/images"
+            className="hover:border-b-orange-400 hover:border-b-2 focus:border-b-orange-400 focus:border-b-2 md:h-[2rem]"
+          >
+            Images
+          </NavLink>
+        )}
+        {user && (
+          <NavLink
             to="/messages"
             className="hover:border-b-orange-400 hover:border-b-2 focus:border-b-orange-400 focus:border-b-2 md:h-[2rem]"
           >

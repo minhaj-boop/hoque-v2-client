@@ -34,9 +34,10 @@ const Menu = () => {
   if (user) {
     NavLinks.push(
       { id: 5, title: "Upload", url: "/upload" },
-      { id: 5, title: "Messages", url: "/messages" },
-      { id: 6, title: "Create Admin", url: "/signup" },
-      { id: 7, title: "Logout", url: "/", onClick: handleLogout }
+      { id: 5, title: "Images", url: "/images" },
+      { id: 6, title: "Messages", url: "/messages" },
+      { id: 7, title: "Create Admin", url: "/signup" },
+      { id: 8, title: "Logout", url: "/", onClick: handleLogout }
     );
   }
 

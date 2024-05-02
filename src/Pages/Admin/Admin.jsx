@@ -41,7 +41,7 @@ const Admin = () => {
       <div className="max-w-md w-full bg-white rounded p-6 space-y-4">
         <form onSubmit={handleSubmit}>
           <div className="flex justify-center items-center mb-4">
-            <p className="text-gray-600">Sign In</p>
+            <p className="text-gray-600 uppercase">Sign In</p>
             {/* <h2 className="text-xl font-bold">Join our community</h2> */}
           </div>
           <div className="pb-2">
