@@ -18,6 +18,7 @@ import Images from './Pages/Images/Images';
 
 function App() {
   const user = localStorage.getItem("token")
+  // console.log(process.env.REACT_APP_SERVICE);
   return (
     <>
       <Router>

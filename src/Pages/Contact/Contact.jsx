@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import axios from "axios";
 import emailjs from "@emailjs/browser";
+// require("dotenv").config();
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -52,9 +53,14 @@ const Contact = () => {
     e.preventDefault();
 
     emailjs
-      .sendForm("service_j0gww2x", "template_7ck1nn5", form.current, {
-        publicKey: "qAvqh1qDjHDFGaVwM",
-      })
+      .sendForm(
+        process.env.REACT_APP_SERVICE,
+        process.env.REACT_APP_TEMPLATE,
+        form.current,
+        {
+          publicKey: process.env.REACT_APP_PK,
+        }
+      )
       .then(
         () => {
           console.log("SUCCESS!");
