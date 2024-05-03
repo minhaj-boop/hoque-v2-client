@@ -95,6 +95,7 @@ const Dropdown = ({ values, setValues }) => {
       name: "Kitchen designer",
     },
   ];
+
   return (
     <div className="outline-none border-none w-[370px] p-[15px] rounded-[10px] bg-orange-100 mx-[5px] mb-[5px] text-[14px]">
       <Select
@@ -102,6 +103,7 @@ const Dropdown = ({ values, setValues }) => {
         options={options}
         labelField="name"
         valueField="id"
+        values={values}
         onChange={(values) => setValues(values)}
       />
     </div>

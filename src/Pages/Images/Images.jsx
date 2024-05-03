@@ -6,13 +6,22 @@ const Images = () => {
   const [images, setImages] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [values, setValues] = useState([]);
-  const [data, setData] = useState({
+  // const [data, setData] = useState({
+  //   title: "",
+  //   desc: "",
+  //   url: "",
+  //   blurhash: "",
+  // });
+  const [editId, setEditId] = useState("");
+  const [error, setError] = useState("");
+  const [product, setProduct] = useState({
     title: "",
     desc: "",
     url: "",
     blurhash: "",
   });
-  const [error, setError] = useState("");
+
+  //fetch all the images//
 
   useEffect(() => {
     // Call the fetchData function when the component mounts
@@ -42,43 +51,62 @@ const Images = () => {
     }
   };
 
-  //update
+  //fetch a single image//
+
+  // Define a function to fetch the data
+  const fetchSingleData = async (id) => {
+    try {
+      // Make the API call
+      const response = await fetch(
+        `https://hoque-v2-server.vercel.app/api/single-product/${id}`
+      );
+      // Parse the response as JSON
+      const data = await response.json();
+
+      // Update the state with the fetched data
+      setProduct(data.data);
+      // console.log(data.data);
+    } catch (error) {
+      console.error("Error fetching dataaa:", error);
+    }
+  };
+
+  //update a single item//
 
   const handleChange = ({ currentTarget: input }) => {
-    setData({ ...data, [input.name]: input.value });
+    setProduct({ ...product, [input.name]: input.value });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // try {
-    //   // Add name from values state to the data state
-    //   const updatedData = { ...data, category: values[0].name };
-    //   // console.log("Updated:", updatedData);
-    //   const url = "https://hoque-v2-server.vercel.app/api/upload-image";
-    //   const { data: res } = await axios.post(url, updatedData);
-    //   //   navigate("/admin");
-    //   console.log(res.message);
-    //   // console.log(data);
-    // } catch (error) {
-    //   if (
-    //     error.response &&
-    //     error.response.status >= 400 &&
-    //     error.response.status <= 500
-    //   ) {
-    //     setError(error.response.data.message);
-    //   }
-    // }
-    // setData({
-    //   title: "",
-    //   desc: "",
-    //   url: "",
-    //   blurhash: "",
-    // });
+    try {
+      // Add name from values state to the data state
+
+      const updatedData = { ...product, category: values[0].name };
+      const url = `https://hoque-v2-server.vercel.app/api/update-image/${editId}`;
+      const { data: res } = await axios.put(url, updatedData);
+      console.log(res);
+      fetchData();
+    } catch (error) {
+      console.log(error);
+      if (
+        error.response &&
+        error.response.status >= 400 &&
+        error.response.status <= 500
+      ) {
+        setError(error.response.data.message);
+      }
+    }
+    setProduct({
+      title: "",
+      desc: "",
+      url: "",
+      blurhash: "",
+    });
   };
 
-  const handleEdit = (id) => {
-    console.log("helloo");
-  };
+  //delete a single image
+
   const handleDelete = async (id, title) => {
     // console.log("hello");
     if (window.confirm(`Are you sure you want to delete the image ${title}?`)) {
@@ -118,8 +146,16 @@ const Images = () => {
             <div className=" flex justify-between items-center gap-1 ">
               <button
                 onClick={() => {
-                  handleEdit(item._id);
+                  setProduct({
+                    title: "",
+                    desc: "",
+                    url: "",
+                    blurhash: "",
+                  });
+                  // setValues([]);
+                  setEditId(item._id);
                   setShowModal(true);
+                  fetchSingleData(item._id);
                 }}
                 className=" w-[60px] rounded border-none p-1 bg-green-600 text-white text-sm cursor-pointer hover:bg-green-400"
               >
@@ -150,14 +186,14 @@ const Images = () => {
                         onSubmit={handleSubmit}
                       >
                         <h1 className="text-[40px] mt-0 uppercase">
-                          Upload Image
+                          Update Image
                         </h1>
                         <input
                           type="text"
                           placeholder="Image title"
                           name="title"
                           onChange={handleChange}
-                          value={data.title}
+                          value={product.title}
                           required
                           className="outline-none border-none w-[370px] p-[15px] rounded-[10px] bg-orange-100 mx-[5px] mb-[5px] text-[14px]"
                         />
@@ -167,7 +203,7 @@ const Images = () => {
                           placeholder="Write the image description here"
                           name="desc"
                           onChange={handleChange}
-                          value={data.desc}
+                          value={product.desc}
                           required
                           className="outline-none border-none w-[370px] p-[15px] rounded-[10px] bg-orange-100 mx-[5px] mb-[5px] text-[14px]"
                         />
@@ -176,7 +212,7 @@ const Images = () => {
                           placeholder="Image url"
                           name="url"
                           onChange={handleChange}
-                          value={data.url}
+                          value={product.url}
                           required
                           className="outline-none border-none w-[370px] p-[15px] rounded-[10px] bg-orange-100 mx-[5px] mb-[5px] text-[14px]"
                         />
@@ -185,7 +221,7 @@ const Images = () => {
                           placeholder="Blurhash string"
                           name="blurhash"
                           onChange={handleChange}
-                          value={data.blurhash}
+                          value={product.blurhash}
                           required
                           className="outline-none border-none w-[370px] p-[15px] rounded-[10px] bg-orange-100 mx-[5px] mb-[5px] text-[14px]"
                         />
