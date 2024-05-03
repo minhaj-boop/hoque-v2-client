@@ -14,11 +14,13 @@ const Navbar = () => {
     // navigate("/admin");
   };
   return (
-    <div className="h-[50px] md:h-[75px] border-b-orange-500 border-b-2 p-4 lg:px-20 xl:px-40 flex justify-between items-center text-orange-400 sticky top-0 z-30 bg-white uppercase">
-      <div className="text-xl md:font-bold uppercase">
-        <NavLink to="/">haque construction</NavLink>
+    <div className="h-[50px] md:h-[75px] border-b-orange-500 border-b-2 p-4 lg:px-10 xl:px-15 flex justify-between items-center text-orange-400 sticky top-0 z-30 bg-white uppercase">
+      <div className="text-xl md:font-bold uppercase flex items-center justify-center">
+        <NavLink className="md:h-[2rem]" to="/">
+          haque construction
+        </NavLink>
       </div>
-      <div className="hidden md:flex gap-4">
+      <div className="hidden md:flex md:items-center md:justify-center gap-4">
         <NavLink
           className="hover:border-b-orange-400 hover:border-b-2 focus:border-b-orange-400 focus:border-b-2 md:h-[2rem]"
           to="/"
